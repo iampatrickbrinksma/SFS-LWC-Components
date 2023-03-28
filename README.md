@@ -1,6 +1,6 @@
 # Lightning Web Components
 
-The intention of this repository is to share some useful Lightning Web Components.
+The intention of this repository is to share some useful Lightning Web Components for the Salesforce Field Service mobile app.
 
 # Online Or Offline (isOnlineOrOffline)
 
