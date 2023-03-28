@@ -1,0 +1,19 @@
+<template>
+    <div class="slds-var-m-around_medium">
+        <p>This is an example parent component which embeds the isOnlineOrOffline component to validate if the SFS mobile app is online or offline.</p>
+        <p>The isOnlineOrOffline component has reported that the device is: {onlineState}.</p>
+    </div>
+    <div class="slds-var-m-around_medium">
+        <lightning-button-group>
+            <lightning-button
+                label="Check If Online"
+                onclick={handleCheckOnline}></lightning-button>
+        </lightning-button-group>
+    </div>
+    <c-is-online-or-offline
+    is-visible="false"
+    lbl-online="🟢 online"
+    lbl-offline="🔴 offline"
+    onstateonline={handleOnlineState}>
+</c-is-online-or-offline>    
+</template>
