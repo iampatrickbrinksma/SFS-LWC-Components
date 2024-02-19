@@ -1,0 +1,127 @@
+<template>
+    <div class="spinner">
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading..." variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <template lwc:if={showCheckInOut}>
+        <lightning-card
+            title={srName}>
+            <!-- sldsValidatorIgnoreNextLine -->
+            <lightning-button-icon
+                icon-name="utility:refresh" 
+                variant="bare" 
+                alternative-text="Refresh" 
+                onclick={refreshData}
+                slot="actions"
+            ></lightning-button-icon>
+            <template for:each={errorMsgs} for:item="errorMsg">
+                <div class="slds-var-m-around_small slds-text-color_error container" key={errorMsg}>
+                    {errorMsg}
+                </div>
+            </template>        
+            <div class="slds-var-m-top_medium">
+                <div class={checkedBadgeCls}>
+                    {checkedInOutValue}
+                </div>
+            </div>
+            <div class="slds-var-p-top_small slds-text-align_center slds-text-body_small">
+                Last updated: <lightning-formatted-date-time 
+                                    value={checkedDate} 
+                                    time-zone={userTimeZone} 
+                                    time-zone-name="short" 
+                                    year="numeric" 
+                                    month="numeric" 
+                                    day="numeric"
+                                    hour="2-digit" 
+                                    minute="2-digit"
+                                ></lightning-formatted-date-time>
+            </div>
+            <div class="slds-var-p-bottom_small slds-text-align_center slds-text-body_small">
+                {CONSTANTS.NUMOFAPPNTS} {saCount}
+            </div>
+            <template if:true={showMap}>
+                <div class="slds-var-p-top_medium slds-var-p-left_medium slds-var-p-right_medium slds-border_top slds-text-body_small">
+                    {CONSTANTS.CURRENTLOC}
+                </div>
+                <div class="slds-var-p-bottom_medium slds-border_bottom">
+                    <template lwc:if={sasWithLocation}>
+                        <lightning-map 
+                            map-markers={locationMarkers} 
+                            list-view="hidden"
+                        ></lightning-map>
+                    </template>
+                    <template lwc:else>
+                        <lightning-map 
+                            map-markers={locationMarkers} 
+                            list-view="hidden"
+                            zoom-level="10"
+                        ></lightning-map>                    
+                    </template>
+                </div>
+            </template>      
+            <div class="slds-var-m-around_medium slds-align_absolute-center grid">
+                <span class="slds-align_absolute-center">
+                    <lightning-button 
+                        variant={btnVariant}
+                        label={btnLabel}
+                        onclick={handleCheckInOut}
+                    ></lightning-button>
+                </span>
+                <span class="slds-var-m-around_small slds-align_absolute-center slds-text-body_small">
+                    {checkInOutTxt}
+                </span>
+            </div>          
+            <p slot="footer">
+                <em>{CONSTANTS.CHECKONLINE}</em>
+            </p>
+        </lightning-card>
+    </template>
+    <template lwc:else>
+        <lightning-card
+        title="Update Successful">
+            <div class="slds-var-m-around_medium slds-align_absolute-center grid">
+                <span class="slds-var-m-around_small slds-align_absolute-center slds-text-body_small">
+                    {CONSTANTS.UPDATESUCCESS}
+                </span>
+                <span class="slds-align_absolute-center">
+                    <lightning-button 
+                        variant="brand"
+                        label="Close"
+                        onclick={closeCheckInOut}
+                    ></lightning-button>
+                </span>
+            </div>                
+            <p slot="footer">
+                <em>{CONSTANTS.THANKYOU}</em>
+            </p>            
+        </lightning-card>
+    </template>
+    <div class="slds-var-m-around_small slds-align_absolute-center">
+        <!-- sldsValidatorIgnoreNextLine -->
+        <lightning-button-icon
+            icon-name="utility:settings" 
+            alternative-text="Toggle Output" 
+            variant="bare" 
+            onclick={toggleOutput}
+        ></lightning-button-icon>
+    </div>
+    <template lwc:if={showOutput}>
+        <div class="slds-var-m-top_medium slds-var-p-around_medium container">
+            <lightning-textarea 
+                name="output" 
+                class="textAreaBody"
+                readonly 
+                value={output} 
+                variant="label-stacked"
+                label="Output">
+            </lightning-textarea>
+            <lightning-button
+                variant="neutral"
+                label="Clear"
+                onclick={clearOutput}
+            ></lightning-button>
+        </div>
+    </template>
+</template>

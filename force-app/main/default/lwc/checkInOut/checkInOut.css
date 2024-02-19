@@ -1,0 +1,47 @@
+:host {
+    --slds-c-button-neutral-color-background: var(--slds-g-color-success-base-50, #2e844a);
+    --slds-c-button-neutral-color-background-active: var(--slds-g-color-success-base-50, #2e844a);
+    --slds-c-button-neutral-color-background-hover: var(--slds-g-color-success-base-50, #2e844a);
+    --slds-c-button-neutral-color-border: var(--slds-g-color-success-base-50, #2e844a);
+    --slds-c-button-neutral-color-border-active: var(--slds-g-color-success-base-50, #2e844a);
+    --slds-c-button-neutral-color-border-hover: var(--slds-g-color-success-base-50, #2e844a);
+    --slds-c-button-text-color: white;
+    --slds-c-button-text-color-active: white;
+    --slds-c-button-text-color-hover: white;
+    --slds-c-button-destructive-background: var(--slds-g-color-destructive-base-50, rgb(142, 3, 15));
+    --slds-c-button-destructive-background-active: var(--slds-g-color-destructive-base-50, rgb(142, 3, 15));
+    --slds-c-button-destructive-background-hover: var(--slds-g-color-destructive-base-50, rgb(142, 3, 15));
+    --slds-c-button-destructive-border: var(--slds-g-color-destructive-base-50, rgb(142, 3, 15));
+    --slds-c-button-destructive-border-active: var(--slds-g-color-destructive-base-50, rgb(142, 3, 15));
+    --slds-c-button-destructive-border-hover: var(--slds-g-color-destructive-base-50, rgb(142, 3, 15));
+  }
+
+.container {
+    background-color: #fff;
+}
+
+.grid {
+    display: grid;
+}
+
+.available {
+    width: 80%;
+    background-color: var(--slds-g-color-success-base-50, #2e844a);
+    color: white;
+    font-weight: var(--lwc-fontWeightBold,700);
+    border-radius: var(--slds-c-badge-radius-border, var(--sds-c-badge-radius-border, var(--lwc-borderRadiusPill,15rem)));
+}
+
+.unavailable {
+    width: 80%;
+    background-color: var(--slds-g-color-destructive-base-50, rgb(142, 3, 15));
+    color: white;
+    font-weight: var(--lwc-fontWeightBold,700);
+    border-radius: var(--slds-c-badge-radius-border, var(--sds-c-badge-radius-border, var(--lwc-borderRadiusPill,15rem)));
+}
+
+.textAreaBody {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 8pt;
+    --sds-c-textarea-sizing-min-height: 200px;
+}
