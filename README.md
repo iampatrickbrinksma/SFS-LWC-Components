@@ -34,3 +34,9 @@ In order for the user to be able to have the right permissions, make sure to do 
 Note: This is NOT possible via the Profile or Permission Set in the Setup UI. However, you can grant Edit permission as following:
 1. Navigate to Setup -> Object Manager -> Service Resource -> Fields & Relationships -> Last Known Location -> Set Field-Level Security and make sure the Visible option is checked for the Profile of the mobile user.
 2. For the Last Known Location Date, update the URL of step 1 from `.../lightning/setup/ObjectManager/ServiceResource/FieldsAndRelationships/LastKnownLocation/edit...` to `.../lightning/setup/ObjectManager/ServiceResource/FieldsAndRelationships/LastKnownLocationDate/edit...`, so changing `LastKnownLocation` to `LastKnownLocationDate`
+
+# File Upload Plus
+
+Inspired by the example code in [the Saleforce documentation](https://developer.salesforce.com/docs/atlas.en-us.mobile_offline.meta/mobile_offline/use_images_upload_while_offline_example.htm) this component allows you to upload a single file (any file type) and populate a custom field define on the ContentVersion object. You can embed this component in another LWC and pass the record Id and custom field API Name and Label.
+
+Important: You have to logout and login or clear metadata cache to obtain the metadata of the custom field defined on the ContentVersion object. This object does not support field level permissions, and any user will have access to the custom field.
