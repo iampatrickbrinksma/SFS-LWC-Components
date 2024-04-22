@@ -1,58 +1,72 @@
 <template>
-    <div>
-        <lightning-input
-            type="file"
-            name="fileUploader"
-            label="Select file to upload"
-            multiple="false"
-            accept="*/*"
-            onchange={handleInputChange}
-        ></lightning-input>
-    </div>
-    <template if:true={fileName}>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="action:upload" size="small"></lightning-icon>
+            <span class="slds-var-m-left_small">Upload File</span>
+        </h3>
+        <div slot="actions">
+            <lightning-button
+                name="cancelUpload"
+                label="Cancel"
+                variant="neutral"
+                onclick={cancelUpload}
+            ></lightning-button>
+        </div>
         <div>
-            <p>Selected file:</p>
-            <p>{fileName}</p>
-            <div class="inputs">
-                <lightning-input
-                    type="text"
-                    name="fileTitle"
-                    label="Title"
-                    value={fieldValues.fileTitle}
-                    onchange={handleInputChange}
-                ></lightning-input>
-                <lightning-input
-                    type="text"
-                    name="fileDesc"
-                    label="Description"
-                    value={fieldValues.fileDesc}
-                    onchange={handleInputChange}
-                ></lightning-input>
-                <template lwc:if={customField}>
+            <lightning-input
+                type="file"
+                name="fileUploader"
+                label="Select file to upload"
+                multiple="false"
+                accept="*/*"
+                onchange={handleInputChange}
+            ></lightning-input>
+        </div>
+        <template if:true={fileName}>
+            <div class="slds-var-p-around_small">
+                <p>Selected file:</p>
+                <p>{fileName}</p>
+                <div class="inputs">
                     <lightning-input
                         type="text"
-                        label={customFieldLabel}
-                        value={fieldValues.customField}
+                        name="fileTitle"
+                        label="Title"
+                        value={fieldValues.fileTitle}
                         onchange={handleInputChange}
-                    ></lightning-input>  
-                </template>          
+                    ></lightning-input>
+                    <lightning-input
+                        type="text"
+                        name="fileDesc"
+                        label="Description"
+                        value={fieldValues.fileDesc}
+                        onchange={handleInputChange}
+                    ></lightning-input>
+                    <template lwc:if={customField}>
+                        <lightning-input
+                            type="text"
+                            label={customFieldLabel}
+                            value={fieldValues.customField}
+                            onchange={handleInputChange}
+                        ></lightning-input>  
+                    </template>          
+                </div>
+                <lightning-button
+                    class="slds-var-p-around_small"
+                    label="Upload"
+                    variant="Brand"
+                    disabled={uploadingFile}
+                    onclick={handleUploadFile}
+                >
+                    <label>Upload</label>
+                </lightning-button>
             </div>
-            <lightning-button
-                class="slds-var-p-around_small"
-                label="Upload"
-                variant="Brand"
-                disabled={uploadingFile}
-                onclick={handleUploadFile}
-            >
-                <label>Upload</label>
-            </lightning-button>
-        </div>
-    </template>
-    <template if:true={errorMessage}>
-        <div class="slds-var-p-around_small">
-            <lightning-card title="Error">
-                <div slot="default">{errorMessage}</div>
-            </lightning-card>
-        </div>
-    </template>
+        </template>
+        <template if:true={errorMessage}>
+            <div class="slds-var-p-around_small">
+                <lightning-card title="Error">
+                    <div slot="default">{errorMessage}</div>
+                </lightning-card>
+            </div>
+        </template>            
+    </lightning-card>
 </template>
