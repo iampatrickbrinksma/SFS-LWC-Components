@@ -1,6 +1,9 @@
-# Lightning Web Components
+# Lightning Web Components for the Salesforce Field Service Mobile App
 
 The intention of this repository is to share some useful Lightning Web Components for the Salesforce Field Service mobile app.
+
+## Disclaimer
+IMPORTANT: This code is not intended to be deployed directly to a Salesforce production environment, but to be used as an example. This is not a Salesforce product and is not officially supported by Salesforce.
 
 # Online Or Offline (isOnlineOrOffline)
 
