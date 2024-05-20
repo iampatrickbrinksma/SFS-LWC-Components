@@ -24,6 +24,12 @@ export default class FileUploadPlus extends LightningElement {
     @api
     customFieldLabel;
 
+    @api 
+    customFieldType;
+
+    @api
+    customFieldDefaultValue;
+
     @track
     files = undefined;
 
@@ -31,7 +37,7 @@ export default class FileUploadPlus extends LightningElement {
     fieldValues = {
         fileTitle: "",
         fileDesc: "",
-        fileCustomField: "",
+        fileCustomField: this.customFieldDefaultValue,
     };
     
     uploadingFile = false;
@@ -59,7 +65,9 @@ export default class FileUploadPlus extends LightningElement {
     handleInputChange(event) {
         if (event.target.name === 'fileUploader'){
             this.files = event.detail.files; 
-            this.fieldValues.fileTitle = this.fileName;   
+            this.fieldValues.fileTitle = this.fileName;  
+        } else if (event.target.name === 'customField' && this.customFieldType === "checkbox"){
+            this.fieldValues[event.target.name] = event.target.checked;
         } else {
             this.fieldValues[event.target.name] = event.detail.value;
         }
@@ -71,7 +79,7 @@ export default class FileUploadPlus extends LightningElement {
         this.fieldValues = {
             fileTitle: "",
             fileDesc: "",
-            fileTemplateKey: "",
+            fileCustomField: this.customFieldDefaultValue,
         };
         this.errorMessage = "";
     }
@@ -153,4 +161,13 @@ export default class FileUploadPlus extends LightningElement {
             })
         );
     }
+
+    get isTextField(){
+        return this.customFieldType === 'text';
+    }
+
+    get isCheckboxField(){
+        return this.customFieldType === 'checkbox';
+    }    
+
 }

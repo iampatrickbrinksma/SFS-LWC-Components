@@ -42,12 +42,24 @@
                         onchange={handleInputChange}
                     ></lightning-input>
                     <template lwc:if={customField}>
-                        <lightning-input
-                            type="text"
-                            label={customFieldLabel}
-                            value={fieldValues.customField}
-                            onchange={handleInputChange}
-                        ></lightning-input>  
+                        <template lwc:if={isTextField}>
+                            <lightning-input
+                                type="text"
+                                name="customField"
+                                label={customFieldLabel}
+                                value={fieldValues.customField}
+                                onchange={handleInputChange}
+                            ></lightning-input>
+                        </template>
+                        <template lwc:elseif={isCheckboxField}>
+                            <lightning-input
+                                type="checkbox"
+                                name="customField"
+                                label={customFieldLabel}
+                                checked={fieldValues.customField}
+                                onchange={handleInputChange}
+                            ></lightning-input>
+                        </template>
                     </template>          
                 </div>
                 <lightning-button
