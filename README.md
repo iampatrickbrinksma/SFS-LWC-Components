@@ -40,6 +40,6 @@ Note: This is NOT possible via the Profile or Permission Set in the Setup UI. Ho
 
 # File Upload Plus
 
-Inspired by the example code in [the Saleforce documentation](https://developer.salesforce.com/docs/atlas.en-us.mobile_offline.meta/mobile_offline/use_images_upload_while_offline_example.htm) this component allows you to upload a single file (any file type) and populate a custom field define on the `ContentVersion` object. You can embed this component in another LWC and pass the record Id and custom field API Name and Label.
+Inspired by the example code in [the Saleforce documentation](https://developer.salesforce.com/docs/atlas.en-us.mobile_offline.meta/mobile_offline/use_images_upload_while_offline_example.htm) this component allows you to upload a single file (any file type) and populate a custom field define on the `ContentVersion` object. You can embed this component in another LWC and pass the record Id and custom field API Name, Label, field type (text and checkbox supported) and a default value. Additionally it dispatches a custom event on file upload and when the upload is canceled.
 
 Important: You have to logout and login or clear metadata cache to obtain the metadata of the custom field defined on the `ContentVersion` object. This object does [not support field level permissions](https://help.salesforce.com/s/articleView?id=000380808&type=1), and any user will have access to the custom field.
