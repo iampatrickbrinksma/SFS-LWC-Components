@@ -1,0 +1,28 @@
+<template>
+        <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="standard:work_order" size="small"></lightning-icon>
+            <span class="slds-var-m-left_small">Attach File To Work Order</span>
+        </h3>
+        <div class="slds-var-p-around_small">
+            <template lwc:if={showAddFilesButton}>
+                <lightning-button
+                    name="addFile"
+                    label="Add File"
+                    onclick={showAddFile}
+                ></lightning-button>
+            </template>
+            <template lwc:if={showFiles}>
+                <c-file-upload-plus
+                    record-id={recordId}
+                    custom-field="Internal_Only__c"
+                    custom-field-label="Internal Only"
+                    custom-field-type="checkbox"
+                    custom-field-default-value="false"
+                    onfileuploaded={fileUploaded}
+                    oncancelupload={cancelUpload}
+                ></c-file-upload-plus>
+            </template> 
+        </div>
+    </lightning-card>
+</template>
