@@ -1,0 +1,36 @@
+<template>
+    <div class="slds-var-p-around_small">
+        <lightning-textarea
+            lwc:ref="debugOutput"
+            class="textAreaBody"
+            name="debugOutput"
+            label="Debug Output"
+            variant="label-stacked"
+            value={output}
+            readonly
+        ></lightning-textarea>
+        <div>
+            <span class="slds-var-p-around_xx-small">
+                <lightning-button-icon
+                name="copyOutput"
+                icon-name="utility:copy"
+                alternative-text="Copy output"
+                variant="bare"
+                onclick={copyOutput}>
+                    <label>Copy Output</label>
+                </lightning-button-icon>
+            </span>
+            <span class="slds-var-p-around_xx-small">
+                <lightning-button-icon
+                name="clearOutput"
+                icon-name="utility:recycle_bin_empty"
+                alternative-text="Clear output"
+                variant="bare"
+                onclick={clearOutput}>
+                    <label>Clear Output</label>
+                </lightning-button-icon>
+            </span>
+
+        </div>
+    </div>    
+</template>

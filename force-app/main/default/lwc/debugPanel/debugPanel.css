@@ -1,0 +1,4 @@
+.textAreaBody {
+    font-family: 'Courier New', Courier, monospace;
+    --sds-c-textarea-sizing-min-height:var(--lwc-sizeLarge, 25rem);
+}
