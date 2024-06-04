@@ -45,6 +45,11 @@ An example of how to use the File Upload Plus component is shown in the ```attac
 # Debug Panel
 It can be challenging to debug your Lightning Web Component while running it in the Salesforce Field Service mobile app. This Debug Panel component provides an easy way to write debugging information into a text area with timestamps added. The panel allows you to copy the text to the clipboard and clear the output.
 
+Example of how it looks embedded in an LWC:
+
+<img src="https://github.com/iampatrickbrinksma/SFS-LWC-Components/assets/78381570/a15694dc-0739-4699-b249-f95c6be77202.png" width="30%" height="30%">
+
+
 To include this component in your LWC, add the following to the js controller:
 ```
 // Log to console and add to output
