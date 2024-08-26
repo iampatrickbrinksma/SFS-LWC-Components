@@ -47,7 +47,7 @@ The `getObjectInfo` wire adapter from the `lightning/uiObjectInfoApi` module can
 
 Screenshot:
 
-![image](https://github.com/user-attachments/assets/64325e22-36f4-43e5-8dab-52e0940e19d1)
+<img src="https://private-user-images.githubusercontent.com/78381570/361395187-64325e22-36f4-43e5-8dab-52e0940e19d1.png" width="30%" height="30%">
 
 # Debug Panel
 It can be challenging to debug your Lightning Web Component while running it in the Salesforce Field Service mobile app. This Debug Panel component provides an easy way to write debugging information into a text area with timestamps added. The panel allows you to copy the text to the clipboard and clear the output.
