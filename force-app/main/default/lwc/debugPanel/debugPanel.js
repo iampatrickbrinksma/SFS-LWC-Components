@@ -5,18 +5,21 @@ export default class DebugPanel extends LightningElement {
     @api
     writeToConsole;
 
-    output;
+    output = '';
 
     @api
-    log( msg ) {
-        this.addToOutput( msg );
-        if ( this.writeToConsole ) {
-            console.log( msg );
-        }        
+    log( msg, consoleOnly ) {
+        this.addToOutput( msg, consoleOnly );
     }
 
-    addToOutput( msg ) {
-        this.output = this.timeStamp() + ' :: ' + msg + '\n' + this.output;
+    addToOutput( msg, consoleOnly ) {
+        let time = this.timeStamp();
+        if ( !consoleOnly ) {
+            this.output = time + ' :: ' + msg + '\n\n' + this.output;
+        }
+        if ( this.writeToConsole ) {
+            console.log( time + ' :: ' + msg );
+        }        
     }    
 
     timeStamp() {

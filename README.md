@@ -53,9 +53,15 @@ Example of how it looks embedded in an LWC:
 To include this component in your LWC, add the following to the js controller:
 ```
 // Log to console and add to output
-log( msg ) {
-    this.template.querySelector( "c-debug-panel").log( msg );
-}
+  // Log msg
+  log( msg, consoleOnly ) {
+      let debugPanel = this.template.querySelector( "c-debug-panel");
+      if ( debugPanel ) {
+          debugPanel.log( msg, consoleOnly );
+      } else {
+          console.log( msg );
+      }
+  } 
 ```
 And the following to the HTML template:
 ```
