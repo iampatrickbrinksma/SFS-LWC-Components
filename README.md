@@ -45,13 +45,16 @@ An example of how to use the File Upload Plus component is shown in the ```attac
 # Object Details
 The `getObjectInfo` wire adapter from the `lightning/uiObjectInfoApi` module can be used to read the metadata information from a SObject to determine what Record Types are accessible for the user, or if a field is updatable, etc. It can also be used to make sure the SObject metadata is primed and available for offline scenarios. This LWC component provides an easy way to view and navigate the `getObjectInfo` results.
 
+Screenshot:
+
+![image](https://github.com/user-attachments/assets/64325e22-36f4-43e5-8dab-52e0940e19d1)
+
 # Debug Panel
 It can be challenging to debug your Lightning Web Component while running it in the Salesforce Field Service mobile app. This Debug Panel component provides an easy way to write debugging information into a text area with timestamps added. The panel allows you to copy the text to the clipboard and clear the output.
 
 Example of how it looks embedded in an LWC:
 
 <img src="https://github.com/iampatrickbrinksma/SFS-LWC-Components/assets/78381570/a15694dc-0739-4699-b249-f95c6be77202.png" width="30%" height="30%">
-
 
 To include this component in your LWC, add the following to the js controller:
 ```
