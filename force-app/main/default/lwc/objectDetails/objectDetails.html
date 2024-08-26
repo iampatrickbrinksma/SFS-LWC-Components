@@ -1,0 +1,94 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="standard:entity" size="small"></lightning-icon>
+            <span class="slds-var-m-left_small">Object Details</span>
+        </h3>        
+        <div class="slds-var-m-around_small">
+            <template lwc:if={errors}>
+                <template for:each={errors} for:item="error">
+                    <p class="slds-text-body_regular slds-text-color_error" key={error}>
+                        {error}
+                    </p>
+                </template>            
+            </template>        
+            <div class="slds-grid slds-grid_vertical-align-end">
+                <div class="slds-col">
+                    <lightning-input
+                        name="objApiName"
+                        value={inputValue}
+                        onchange={updateObjApiName}
+                    ></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-button-icon
+                        name="getObjDetails"
+                        class="slds-var-m-left_x-small"
+                        icon-name="utility:search"
+                        variant="brand"
+                        alternative-text="Get Object Details"
+                        onclick={getObjDetails}
+                    >
+                        <label>Get Object Details</label>
+                    </lightning-button-icon>
+                </div>
+            </div>
+            <lightning-combobox
+                name="objectPicklist"
+                label="Choose an object"
+                value={objApiName}
+                placeholder="Select an object"
+                options={sObjects}
+                onchange={handleSObjectChange}
+            ></lightning-combobox>            
+        </div>
+        <template lwc:if={details}>
+            <div class="slds-var-m-around_small">
+                <lightning-card>
+                    <h4 slot="title">
+                        <lightning-icon icon-name="utility:info" size="small"></lightning-icon>
+                        <span class="slds-var-m-left_small">Details</span>
+                    </h4> 
+                    <div slot="actions">
+                        <lightning-button-icon 
+                            icon-name="utility:close" 
+                            variant="bare" 
+                            alternative-text="Close"
+                            onclick={closeDetails}>
+                            <label>Close</label>
+                        </lightning-button-icon>
+                    </div> 
+                    <div class="slds-var-m-around_small">
+                        <template for:each={crumbs} for:item="crumb">
+                            <span 
+                                key={crumb.level} 
+                                class="slds-text-body_small" 
+                                data-name={crumb.name} 
+                                data-level={crumb.level} 
+                                onclick={navigateTo}
+                            >{crumb.name} &gt; </span>
+                        </template>                    
+                    </div>                        
+                    <div class="slds-grid slds-wrap">
+                        <template for:each={details} for:item="detail">
+                            <div key={detail.name} class="slds-col slds-size_1-of-2 slds-border_bottom ">
+                                <span class="slds-text-body_small slds-truncate">{detail.name}</span>
+                            </div>
+                            <div key={detail.name} class="slds-col slds-size_1-of-2 slds-border_bottom ">
+                                <span class="slds-text-body_small slds-truncate">
+                                    <template lwc:if={detail.object}><span style="font-style: italic;" data-name={detail.name} onclick={handleMoreInfo}>more info &rightarrow;</span></template>
+                                    <template lwc:else>{detail.value}</template>
+                                </span>
+                            </div>
+                        </template>
+                    </div>                    
+                </lightning-card>
+            </div>
+        </template>
+    </lightning-card>
+    <div class="slds-var-m-around_small">
+        <c-debug-panel
+            write-to-console="true"
+        ></c-debug-panel>
+    </div>           
+</template>

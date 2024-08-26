@@ -42,6 +42,9 @@ Important: You have to logout and login or clear metadata cache to obtain the me
 
 An example of how to use the File Upload Plus component is shown in the ```attachFileToWorkOrder``` LWC, which uses the ```Internal_Only__c``` custom checkbox field on the ContentVersion object. Make sure to create/deploy that field in order to use this LWC. Add the LWC as an Action to the Work Order to expose it in the Field Service Mobile app.
 
+# Object Details
+The `getObjectInfo` wire adapter from the `lightning/uiObjectInfoApi` module can be used to read the metadata information from a SObject to determine what Record Types are accessible for the user, or if a field is updatable, etc. It can also be used to make sure the SObject metadata is primed and available for offline scenarios. This LWC component provides an easy way to view and navigate the `getObjectInfo` results.
+
 # Debug Panel
 It can be challenging to debug your Lightning Web Component while running it in the Salesforce Field Service mobile app. This Debug Panel component provides an easy way to write debugging information into a text area with timestamps added. The panel allows you to copy the text to the clipboard and clear the output.
 
