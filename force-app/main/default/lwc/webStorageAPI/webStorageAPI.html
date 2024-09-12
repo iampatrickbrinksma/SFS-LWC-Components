@@ -1,0 +1,114 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="custom:custom42" size="small"></lightning-icon>
+            <span class="slds-var-m-left_small">Web Storage API</span>
+        </h3>
+        <div class="slds-var-m-around_medium"> 
+            <lightning-combobox
+                name="options"
+                label="Select Storage Type"
+                value={storageType}
+                options={storageTypeOptions}
+                onchange={handleStorageTypeChange}
+            ></lightning-combobox>
+        </div>    
+    </lightning-card>
+    <template lwc:if={storageSelected}>
+        <lightning-card>
+            <h3 slot="title">
+                <lightning-icon icon-name="custom:custom42" size="small"></lightning-icon>
+                <span class="slds-var-m-left_small">Session Storage Available: {sessionStorageAvailable}</span>
+            </h3>
+            <div class="slds-var-m-around_medium"> 
+                <strong>Current Storage Content: {storageType}</strong>
+                <div class="slds-grid">
+                    <div class="slds-col">
+                        <template for:each={keyVals} for:item="item">
+                            <div key={item.name} class="slds-grid">
+                                <div class="slds-col">
+                                    <lightning-input 
+                                        type="text"
+                                        label="Key"
+                                        value={item.name}
+                                        variant="label-stacked"
+                                        read-only="true"
+                                    ></lightning-input>                                
+                                </div>
+                            </div>
+                        </template> 
+                    </div>
+                    <div class="slds-col">
+                        <template for:each={keyVals} for:item="item">
+                            <div key={item.name} class="slds-grid">
+                                <div class="slds-col slds-text-align_left">
+                                    <lightning-input 
+                                        type="text"
+                                        label="Value"
+                                        value={item.value}
+                                        variant="label-stacked"
+                                        read-only="true"
+                                    ></lightning-input>                                
+                                </div>
+                            </div>
+                        </template> 
+                    </div>
+                </div>
+            </div>
+            <div class="slds-var-m-around_medium">
+                <strong>Update Properties</strong>
+                <div class="slds-grid">
+                    <div>
+                        <lightning-input 
+                            type="text"
+                            label="Property Name"
+                            value={name}
+                            variant="label-stacked"
+                            onchange={handleNameChange}
+                        ></lightning-input>
+                    </div>
+                    <div>
+                        <lightning-input 
+                            type="text"
+                            label="Property Value"
+                            value={val}
+                            variant="label-stacked"
+                            onchange={handleValueChange}
+                        ></lightning-input>  
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col">
+                        <lightning-button 
+                            label="Save"
+                            onclick={storeProp}
+                        ></lightning-button>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-button 
+                            label="Get"
+                            onclick={getPropValue}
+                        ></lightning-button>
+                    </div>                
+                    <div class="slds-col">
+                        <lightning-button 
+                            label="Remove"
+                            onclick={removeProp}
+                        ></lightning-button>      
+                    </div>  
+                    <div class="slds-col">
+                        <lightning-button 
+                            label="Clear"
+                            onclick={clearValues}
+                        ></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+    <div class="slds-var-m-around_small">
+        <c-debug-panel
+            write-to-console="true"
+        ></c-debug-panel>
+    </div>               
+</template>

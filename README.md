@@ -49,6 +49,14 @@ Screenshot:
 
 ![image](https://github.com/user-attachments/assets/da838bb0-62a2-4c85-87b7-3b697627e488)
 
+# Web Storage API
+The `Web Storage API` (https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) allows you to store key / value pairs in the browser storage. This can be useful when developing LWCs for the SFS mobile app. The `webStorage` LWC is a class that enables the use of the Web Storage API, and the `webStorageAPI` component is an example of the use of this class. 
+It's important to understand the difference between the storage types supported, which are:
+  * `sessionStorage` - Stores data as part of when the SFS mobile app is open. When it's force closed, or closed by the mobile operating system, the storage is lost.
+  * `localStorage` - Stores data persistently and is available until it is cleared or the user logs out.
+
+To use this LWC, create a Global Action referncing the LWC and add it to the appropriate Publish Layout or create an object specific Action and add it to the appropriate Layout.
+
 # Debug Panel
 It can be challenging to debug your Lightning Web Component while running it in the Salesforce Field Service mobile app. This Debug Panel component provides an easy way to write debugging information into a text area with timestamps added. The panel allows you to copy the text to the clipboard and clear the output.
 
@@ -79,3 +87,4 @@ To write a message to the debug panel, just call the log function:
 ```
 this.log( `Add this message to the debug panel and include this JSON object: ${ JSON.stringify( jsonObject ) } );
 ```
+
