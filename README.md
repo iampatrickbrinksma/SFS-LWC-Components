@@ -55,7 +55,15 @@ It's important to understand the difference between the storage types supported,
   * `sessionStorage` - Stores data as part of when the SFS mobile app is open. When it's force closed, or closed by the mobile operating system, the storage is lost.
   * `localStorage` - Stores data persistently and is available until it is cleared or the user logs out.
 
-To use this LWC, create a Global Action referncing the LWC and add it to the appropriate Publish Layout or create an object specific Action and add it to the appropriate Layout.
+To use this LWC, create a Global Action referncing the LWC and add it to the appropriate Publish Layout or create an object specific Action and add it to the appropriate Layout. Make sure you deploy the following LWCs: 
+* webStorage
+* webStorageAPI
+* debugPanel
+
+## Important
+* The Web Storage API is NOT a replacement for the normal data storage in Salesforce objects
+* The storage is not encrypted at rest by the SFS mobile app
+* It is recommended to use this only in specific use cases whereby the state of an LWC needs to be restored
 
 # Debug Panel
 It can be challenging to debug your Lightning Web Component while running it in the Salesforce Field Service mobile app. This Debug Panel component provides an easy way to write debugging information into a text area with timestamps added. The panel allows you to copy the text to the clipboard and clear the output.
