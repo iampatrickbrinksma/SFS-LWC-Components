@@ -7,8 +7,8 @@ import { LightningElement, api, track } from 'lwc';
 import WebStorage from 'c/webStorage';
 let ws;
 
-const RECORDID = 'NewRecord';           // Record Id if the LWC is used as a Global Action
-const INSTANCE = 'sessionStorage';      // Unique identifier for storage
+const RECORDID = 'GlobalAction';           // Record Id if the LWC is used as a Global Action
+const INSTANCE = 'webStorageAPI';      // Unique identifier for storage
 
 export default class WebStorageAPI extends LightningElement {
 
