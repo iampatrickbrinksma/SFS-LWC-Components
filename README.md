@@ -66,8 +66,11 @@ The following components are part of this example:
 * Permission Set: `Field_Service_Custom_Metadata_Type_Primer`
 
 Deploy these components, assign your SFS mobile user the Permission Set and add the Global Action to the appropriate Publisher Layout.
+Clear the metadata cache in the SFS mobile app, and when you open the Global Action, you should see something like:
 
+![image](https://github.com/user-attachments/assets/a18d5f22-8a9b-4375-b9b5-ea811ffd3ed9)
 
+This data is also available for offline use, as the SFS mobile app will prime the data via the Apex wire, and store it in the local cache.
 
 # Web Storage API
 The `Web Storage API` (https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) allows you to store key / value pairs in the browser storage. This can be useful when developing LWCs for the SFS mobile app. The `webStorage` LWC is a class that enables the use of the Web Storage API, and the `webStorageAPI` component is an example of the use of this class. 
