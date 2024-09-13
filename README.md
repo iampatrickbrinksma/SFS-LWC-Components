@@ -49,6 +49,26 @@ Screenshot:
 
 ![image](https://github.com/user-attachments/assets/da838bb0-62a2-4c85-87b7-3b697627e488)
 
+# Prime Custom Metadata Types
+Custom Metadata Types are a great way to define custom application metadata which is customizable, deployable, packageable, and upgradeable. Currently (Winter '25) it is not possible to prime Custom Metadata Types for offline scenarios using the Briefcase Builder nor GraphQL in a Lightning Web Component. However, by using an Apex wire it is possible to prime Custom Metadata Types for offline use.
+
+The following components are part of this example:
+* Custom Metadata Type: `SFS_Mobile_Setting__mdt`
+  * Custom Metadata Type records: 
+    * `SFS_Mobile_Setting.Setting_1`
+    * `SFS_Mobile_Setting.Setting_2`
+    * `SFS_Mobile_Setting.Setting_3`
+    * `SFS_Mobile_Setting.Setting_4`
+    * `SFS_Mobile_Setting.Setting_5`
+* Apex Class: `CustomMetadataTypeUtil`
+* Lightning Web Component: `primeCustomMetadata`
+* Global Action: `Settings_Primer`
+* Permission Set: `Field_Service_Custom_Metadata_Type_Primer`
+
+Deploy these components, assign your SFS mobile user the Permission Set and add the Global Action to the appropriate Publisher Layout.
+
+
+
 # Web Storage API
 The `Web Storage API` (https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) allows you to store key / value pairs in the browser storage. This can be useful when developing LWCs for the SFS mobile app. The `webStorage` LWC is a class that enables the use of the Web Storage API, and the `webStorageAPI` component is an example of the use of this class. 
 It's important to understand the difference between the storage types supported, which are:

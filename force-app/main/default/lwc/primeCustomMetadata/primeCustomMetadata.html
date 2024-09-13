@@ -1,0 +1,42 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="standard:settings" size="small"></lightning-icon>
+            <span class="slds-var-m-left_small">Custom Metadata Settings</span>
+        </h3>
+        <div class="slds-var-m-around_medium"> 
+            <div class="slds-grid">
+                <div class="slds-col">
+                    <template for:each={settings} for:item="item">
+                        <div key={item.name} class="slds-grid">
+                            <div class="slds-col">
+                                <lightning-input 
+                                    type="text"
+                                    label="Setting"
+                                    value={item.name}
+                                    variant="label-stacked"
+                                    read-only="true"
+                                ></lightning-input>                                
+                            </div>
+                        </div>
+                    </template> 
+                </div>
+                <div class="slds-col">
+                    <template for:each={settings} for:item="item">
+                        <div key={item.name} class="slds-grid">
+                            <div class="slds-col slds-text-align_left">
+                                <lightning-input 
+                                    type="text"
+                                    label="Value"
+                                    value={item.value}
+                                    variant="label-stacked"
+                                    read-only="true"
+                                ></lightning-input>                                
+                            </div>
+                        </div>
+                    </template> 
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>
