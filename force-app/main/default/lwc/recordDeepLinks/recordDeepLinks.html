@@ -1,0 +1,42 @@
+<template>
+    <lightning-card variant="Narrow" title="Deep Link Urls for Record" icon-name="standard:link">
+        <div class="slds-var-m-around_small">
+            <span>
+                Example Lightning Web Component to show how Deep Linking can be used to navigate to the different sections on a record page and also how to navigate 
+                to actions on a record page, or open the service report preview, for which a signature is required. This example assumes the deep link urls are stored
+                in a custom field on the record. The signature stored in the custom field can be used or a new signature can be obtained via an Apex call to the server.
+            </span>
+        </div>
+        <div class="slds-var-m-around_small">
+            <lightning-combobox
+                label="Select Source"
+                variant="label-stacked"
+                value={selectedSource}
+                options={sourceOptions}
+                onchange={handleSourceChange}
+                required
+            ></lightning-combobox>
+        </div>
+        <div class="slds-var-m-around_small">
+            <lightning-combobox
+                label="Select Deep Link Destination"
+                variant="label-stacked"
+                options={deepLinkOptions}
+                value={selectedDeepLink}
+                onchange={handleDeepLinkChange}
+                required
+            ></lightning-combobox>
+        </div>    
+        <div class="slds-var-m-around_small">
+            <lightning-button
+                label="Open Deep Link"
+                onclick={handleOpenDeepLink}
+            ></lightning-button>
+        </div>
+    </lightning-card>    
+    <div class="slds-var-m-around_medium">
+        <c-debug-panel
+            write-to-console="true"
+        ></c-debug-panel>
+    </div>
+</template>

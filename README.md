@@ -71,6 +71,30 @@ Clear the metadata cache in the SFS mobile app, and when you open the Global Act
 ![image](https://github.com/user-attachments/assets/a18d5f22-8a9b-4375-b9b5-ea811ffd3ed9)
 
 This data is also available for offline use, as the SFS mobile app will prime the data via the Apex wire, and store it in the local cache.
+# Deep Link Urls with Signature
+When using Deep Linking to navigate from an external app, or from within the app, to the Field Service mobile app certain deep link urls need to be signed in order for the security dialogue to be suppressed, see help doc: https://developer.salesforce.com/docs/atlas.en-us.field_service_dev.meta/field_service_dev/fsl_dev_mobile_deep_linking_hide_security_dialog.htm.
+This example shows how to generate the signature in Apex for links that are "static" in nature, meaning they just rely on the Salesforce record Id and not dynamic parameters. The example includes an Apex class with a method to generate the deep link urls for a record and store them in a custom field, and a Lightning Web Component to use it in the mobile app. 
+
+The folowing components are part of this example:
+* Apex Class: `DeepLinkUrl`
+* Lightning Web `Component: recordDeepLinks`
+* Custom Field: `ServiceAppointment.Deeplink_Url__c`
+* Quick Action: `ServiceAppointment.Deep_Link_Urls`
+* Permission Set: `Field_Service_Deep_Linking_Permissions`
+
+Deploy these components, add the Quick Action to the assigned Page Layout for Service Appointment and assign the Permission Set to your user and the user of the mobile app. Then update the custom field on a Service Appointment record like:
+```
+// List of Quick Actions for which you want to generate a deep link url with signature
+List<DeepLinkUtil.deepLinkAction> quickActions = new List<DeepLinkUtil.deepLinkAction>{
+    new DeepLinkUtil.deepLinkAction( 'Deep_Link_Urls', 'Deep Link Urls', true )
+};
+Id saId = '<Service Appointment Record Id>';
+ServiceAppointment sa = [select Id, Deeplink_Url__c from ServiceAppointment where Id = :saId];
+sa.Deeplink_Url__c = JSON.serialize( DeepLinkUtil.createDeepLinkUrls( sa.Id, quickActions ) );
+update sa;
+```
+
+Then open the mobile app, navigate to the service appointment and open the `Deep Link Urls` action and test the deep linking.
 
 # Web Storage API
 The `Web Storage API` (https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) allows you to store key / value pairs in the browser storage. This can be useful when developing LWCs for the SFS mobile app. The `webStorage` LWC is a class that enables the use of the Web Storage API, and the `webStorageAPI` component is an example of the use of this class. 
