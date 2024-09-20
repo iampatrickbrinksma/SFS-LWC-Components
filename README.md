@@ -70,7 +70,8 @@ Clear the metadata cache in the SFS mobile app, and when you open the Global Act
 
 ![image](https://github.com/user-attachments/assets/a18d5f22-8a9b-4375-b9b5-ea811ffd3ed9)
 
-This data is also available for offline use, as the SFS mobile app will prime the data via the Apex wire, and store it in the local cache.
+This data is also available for offline use, as the SFS mobile app will prime the data via the Apex wire, and store it in the local cache. This local cache is separate from the data cache and is immutable.
+
 # Deep Link Urls with Signature
 When using Deep Linking to navigate from an external app, or from within the app, to the Field Service mobile app certain deep link urls need to be signed in order for the security dialogue to be suppressed, see help doc: https://developer.salesforce.com/docs/atlas.en-us.field_service_dev.meta/field_service_dev/fsl_dev_mobile_deep_linking_hide_security_dialog.htm.
 This example shows how to generate the signature in Apex for links that are "static" in nature, meaning they just rely on the Salesforce record Id and not dynamic parameters. The example includes an Apex class with a method to generate the deep link urls for a record and store them in a custom field, and a Lightning Web Component to use it in the mobile app. 
