@@ -4,6 +4,16 @@ The intention of this repository is to share some useful Lightning Web Component
 ## Disclaimer
 IMPORTANT: This code is not intended to be deployed directly to a Salesforce production environment, but to be used as an example. This is not a Salesforce product and is not officially supported by Salesforce.
 
+## Components Included In This Repository
+* Online of Offline
+* Check In/Out
+* File Upload Plus
+* Object Details
+* Prime Custom Metadata
+* Generate Deep Link Urls with Signature
+* Web Storage API
+* Debug Panel
+
 # Online Or Offline (isOnlineOrOffline)
 This component can detect if the LWC is online or offline. Today (Spring '23 release) there is no standard method in LWC to detect this. By using imperative Apex with a simple Apex method it can be derived if the LWC is online or offline. It is important to understand that the online and offline state is not detected automatically and it only works on demand.
 
@@ -72,7 +82,7 @@ Clear the metadata cache in the SFS mobile app, and when you open the Global Act
 
 This data is also available for offline use, as the SFS mobile app will prime the data via the Apex wire, and store it in the local cache. This local cache is separate from the data cache and is immutable.
 
-# Deep Link Urls with Signature
+# Generate Deep Link Urls with Signature
 When using Deep Linking to navigate from an external app, or from within the app, to the Field Service mobile app certain deep link urls need to be signed in order for the security dialogue to be suppressed, see help doc: https://developer.salesforce.com/docs/atlas.en-us.field_service_dev.meta/field_service_dev/fsl_dev_mobile_deep_linking_hide_security_dialog.htm.
 This example shows how to generate the signature in Apex for links that are "static" in nature, meaning they just rely on the Salesforce record Id and not dynamic parameters. The example includes an Apex class with a method to generate the deep link urls for a record and store them in a custom field, and a Lightning Web Component to use it in the mobile app. 
 
