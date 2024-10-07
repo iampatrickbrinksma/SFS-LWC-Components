@@ -2,7 +2,17 @@
 The intention of this repository is to share some useful Lightning Web Components for the Salesforce Field Service mobile app.
 
 ## Disclaimer
-IMPORTANT: This code is not intended to be deployed directly to a Salesforce production environment, but to be used as an example. This is not a Salesforce product and is not officially supported by Salesforce.
+This repository contains code intended to help Salesforce Field Service customers and partners accelerate their implementations. Please note the following:
+* This code is not an official Salesforce product.
+* It is not officially supported by Salesforce.
+* The code serves as an example of how to implement specific functionality or make use of certain features.
+
+Before using this code in a production environment, it is crucial that you:
+* Adopt the code to fit your specific needs.
+* Test thoroughly to ensure it works as expected in your environment.
+* Consider the code to be your own and take full responsibility for its use.
+
+By using this code, you acknowledge that Salesforce is not liable for any issues that may arise from its use.
 
 ## Components Included In This Repository
 * Online of Offline
