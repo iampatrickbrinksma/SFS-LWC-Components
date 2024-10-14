@@ -28,28 +28,27 @@ export default class ObjectDetails extends LightningElement {
     _details;
 
     // objectInfo wire results
-    _objInfo;
+    _objInfo;   
 
-    connectedCallback() {
-        // Get all accessible SObjects using Apex method
-        // Note: This does include objects that are not supported
-        // by the UI API, but currently there is no way to determine
-        // from the metadata if a SObject is supported or not
-        getAllSObjects()
-        .then( ( result ) => {
+    // Get all accessible SObjects using Apex method
+    // Note: This does include objects that are not supported
+    // by the UI API, but currently there is no way to determine
+    // from the metadata if a SObject is supported or not
+    @wire( getAllSObjects )
+    handleSObjects( { error, data } ) {
+        if ( data ) {
             let objs = [];
-            for ( const [key, value] of Object.entries( result ) ) {
+            for ( const [key, value] of Object.entries( data ) ) {
                 objs.push(
                     { label: value, value: key }    
                 );
             }
-            this.sObjects = objs;
-        } )
-        .catch( ( error ) => {
-            this.log( `getAllSObjects error: ${ JSON.stringify( error ) }` );
+            this.sObjects = objs;        
+        } else if ( error ) {
+            this.log( `Error in handleSObjects: ${ JSON.stringify( error ) }` );
             this.errors = reduceErrors( error );
-        } );
-    }    
+        }
+    }
 
     @wire( getObjectInfo, { objectApiName: '$objApiName' } )
     objectInfoResult( result ) {
