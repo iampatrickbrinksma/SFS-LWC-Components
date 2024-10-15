@@ -69,6 +69,8 @@ Screenshot:
 
 ![image](https://github.com/user-attachments/assets/da838bb0-62a2-4c85-87b7-3b697627e488)
 
+Additionally, because a wire is used to call the Apex method, the results are cached locally and the data is available in offline scenarios.
+
 # Prime Custom Metadata Types
 Custom Metadata Types are a great way to define custom application metadata which is customizable, deployable, packageable, and upgradeable. Currently (Winter '25) it is not possible to prime Custom Metadata Types for offline scenarios using the Briefcase Builder nor GraphQL in a Lightning Web Component. However, by using an Apex wire it is possible to prime Custom Metadata Types for offline use.
 
