@@ -112,9 +112,15 @@ List<DeepLinkUtil.deepLinkAction> quickActions = new List<DeepLinkUtil.deepLinkA
     new DeepLinkUtil.deepLinkAction( 'Deep_Link_Urls', 'Deep Link Urls', true )
 };
 Id saId = '<Service Appointment Record Id>';
-ServiceAppointment sa = [select Id, Deeplink_Url__c from ServiceAppointment where Id = :saId];
-sa.Deeplink_Url__c = JSON.serialize( DeepLinkUtil.createDeepLinkUrls( sa.Id, quickActions ) );
-update sa;
+String deepLinkUrls = JSON.serialize( DeepLinkUtil.createDeepLinkUrls( sa.Id, quickActions ) );
+update new ServiceAppointment(Id = saId, Deeplink_Url__c = deepLinkUrls);
+```
+
+To generate deep link urls for the standard actions, use:
+```
+Id saId = '<Service Appointment Record Id>';
+String deepLinkUrls = JSON.serialize( DeepLinkUtil.createDeepLinkUrls( sa.Id ) );
+update new ServiceAppointment(Id = saId, Deeplink_Url__c = deepLinkUrls);
 ```
 
 Then open the mobile app, navigate to the service appointment and open the `Deep Link Urls` action and test the deep linking.
