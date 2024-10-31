@@ -1,35 +1,30 @@
 <template>
-    <div class="slds-var-p-top_small" onclick={toggleFile}>
-        <lightning-icon 
-            icon-name={fileDetailsIcon}
-            alternative-text={fileDetailsText}
-            size="x-small"
-            title="x-small size">
-        </lightning-icon>
-        <lightning-icon 
-            class="slds-var-m-left_x-small"
-            icon-name={fileLoadIcon}
-            alternative-text={fileLoadText}
-            size="x-small"
-            title="x-small size">
-        </lightning-icon>        
-        <lightning-icon 
-            class="slds-var-m-left_x-small"
-            icon-name={typeOfFile} 
-            size="x-small">
-        </lightning-icon>
-        <span class="slds-var-m-left_small" style="font-weight: normal;overflow-wrap:anywhere;">
-            {file.title}
-        </span>
-        <div class="slds-text-body_small" lwc:ref="imgDiv" style="display: none;">
-            <div>File Type: {file.type}</div>
-            <div>File Extension: {file.ext}</div>
-            <div>File Size: {fileSizeInKb}</div>
-            <div>Last Modified Date: {file.lastModDate}</div>
-            <template lwc:if={file.desc}>
-                <div> Description: {file.desc}</div>
-            </template>
-            <img src={file.url} style="max-width: 75%;" onload={fileLoaded} onerror={errorOnLoad} />
+    <template lwc:if={file}>
+        <div class="slds-var-p-top_small" onclick={toggleFile}>
+            <lightning-icon 
+                icon-name={fileDetailsIcon}
+                alternative-text={fileDetailsText}
+                size="x-small"
+                title="x-small size">
+            </lightning-icon>
+            <lightning-icon 
+                class="slds-var-m-left_x-small"
+                icon-name={typeOfFile} 
+                size="x-small">
+            </lightning-icon>
+            <span class="slds-var-m-left_small" style="font-weight: normal;overflow-wrap:anywhere;">
+                {file.title}
+            </span>
+            <div class="slds-text-body_small" lwc:ref="imgDiv" style="display: none;">
+                <div>File Type: {file.type}</div>
+                <div>File Extension: {file.ext}</div>
+                <div>File Size: {fileSizeInKb}</div>
+                <div>Last Modified Date: {file.lastModDate}</div>
+                <template lwc:if={file.desc}>
+                    <div> Description: {file.desc}</div>
+                </template>
+                <img src={file.url} style="max-width: 75%;" onload={fileLoaded} onerror={errorOnLoad} />
+            </div>
         </div>
-    </div>
+    </template>
 </template>

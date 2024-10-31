@@ -40,6 +40,7 @@
             </div>
         </template>
         <div class="slds-var-m-left_large slds-var-m-right_large slds-var-p-left_large slds-var-p-right_large">
+            {showHeader} - {showFileList} - {fileListClass}
             <div onclick={toggleFiles}>
                 <div>
                     <lightning-progress-bar
@@ -50,7 +51,7 @@
                 <div class="slds-text-body_small">Progress: {filesLoaded}/{numOfFiles} ({sizeLoadedKB}/{totalSizeKB}KB)</div>
             </div>
             <template lwc:if={renderFiles}>
-                <div lwc:ref="filesDiv" style="display:none;">
+                <div lwc:ref="filesDiv" class={fileListClass}>
                     <template for:each={filesDetails} for:item="file">
                         <div key={file.contentVersionId}>
                             <c-file-primer

@@ -40,6 +40,12 @@ export default class RecordFilePrimer extends NavigationMixin( LightningElement 
         super();
     }
 
+    connectedCallback(){
+        if ( this.showHeader ) {
+            this.showFileList = true;
+        }
+    }
+
     // getRecord wire adapter to retrieve parent record details
     @wire(
         getRecord,
@@ -239,15 +245,6 @@ export default class RecordFilePrimer extends NavigationMixin( LightningElement 
         return ( this.rawSizeLoaded / 1000 ).toFixed(0);
     }
 
-    // Show / hide list of files
-    toggleFiles() {
-        let el = this.refs?.filesDiv;
-        if ( el ) {
-            el.style.display = el.style.display === 'none' ? 'block' : 'none';
-            this.showFileList = !this.showFileList;
-        }
-    } 
-
     // Get text for file details
     get fileDetailsText() {
         return this.showFileList ? "Hide files" : "Show files";
@@ -258,8 +255,24 @@ export default class RecordFilePrimer extends NavigationMixin( LightningElement 
         return this.showFileList ? "utility:down" : "utility:right";
     }
 
+    // Indicator to show some additional information 
+    // if component is not a child component
     get showHeader() {
         return !this.hideHeader;
+    }
+
+    // Show / hide list of files
+    toggleFiles() {
+        let el = this.refs?.filesDiv;
+        if ( el ) {
+            this.showFileList = !this.showFileList;
+            el.className = this.fileListClass;
+        }
+    } 
+
+    // CSS class to show/hide file list
+    get fileListClass() {
+        return this.showFileList ? "showFilesList" : "hideFilesList";
     }
 
     // Dispatch event which includes inforamtion

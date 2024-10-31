@@ -5,8 +5,6 @@ import { getRecord } from 'lightning/uiRecordApi';
 // Mapping of file types to icons and a default icon
 import { FILE_TYPES } from './fileTypes';
 
-const CHECK = "✅";
-
 // eslint-disable-next-line @salesforce/lwc-graph-analyzer/no-unresolved-parent-class-reference
 export default class FilePrimer extends LightningElement {
 
@@ -15,9 +13,7 @@ export default class FilePrimer extends LightningElement {
     @api contentVersionId;
 
     // File details for display
-    @track file = {
-        isLoaded: false
-    };
+    @track file = {};
 
     // Indicator that file
     // details are shown or
@@ -118,7 +114,6 @@ export default class FilePrimer extends LightningElement {
     // For files supported by the <img> tag
     // the onload event is triggered
     fileLoaded(){
-        this.file.isLoaded = true;
         this.dispatchLoadEvent( 'success' );
     }
 
@@ -128,7 +123,6 @@ export default class FilePrimer extends LightningElement {
     // introduce a risk when a file really could
     // not be loaded...
     errorOnLoad(){
-        this.file.isLoaded = true;
         this.dispatchLoadEvent( 'error' );
     }
 
@@ -169,21 +163,13 @@ export default class FilePrimer extends LightningElement {
 
     // File type
     get typeOfFile() {
-        return this.fileTypes[ this.file.type ] ? this.fileTypes[ this.file.type ] : this.fileTypes[ 'UNKNOWN' ];
+        return this.file?.type ? this.fileTypes[ this.file.type ] ? this.fileTypes[ this.file.type ] : this.fileTypes[ 'UNKNOWN' ] : undefined;
     }
 
     // File size in KiloBytes
     get fileSizeInKb() {
         return this.file.size ? `${ ( this.file.size / 1000 ).toFixed(0) }KB` : '';
     }
-
-    get fileLoadIcon() {
-        return !this.file.isLoaded ? "utility:sync_in_progress" : "utility:offline_cached";
-    }
-
-    get fileLoadTxt() {
-        return !this.file.isLoaded ? "Priming in progress" : "Priming completed";
-    }    
 
     // Extract all field names in syntax
     // <ObjectApiName>.<FieldApiName>
