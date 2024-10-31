@@ -28,6 +28,16 @@ By using this code, you acknowledge that Salesforce is not liable for any issues
 # Prime Files for Offline Use (scheduleFilePrimer)
 This component downloads files related to Work Orders and Work Order Line Items which are parent records of the service appointments which make up the schedule of the service resource. Today (Winter '25), Salesforce Field Service does not have an out of the box feature to prime files for offline use. The user has to open a file for it to be available for offline use, which can be a cumbersome task for a service resource. The component is able to download any file due to the behavior of the underlying runtime engine that causes the app to download any file that is references in an IMG tag in the template. Additionally, all the details of the records of the `ContentDocumentLink`, `ContentDocument` and `ContentVersion` objects need to be primed as well to be able to view the files when the device is offline using the native file preview component.
 
+Some screenshots:
+
+<p float="left">
+<img width="260" alt="image" src="https://github.com/user-attachments/assets/b243a8db-3fbc-4fda-b9b2-f8908380b943">
+&nbsp;&nbsp;
+<img width="260" alt="image" src="https://github.com/user-attachments/assets/f3d09f75-8aaf-4cba-a33b-e0f8efbea43d">
+&nbsp;&nbsp;
+<img width="260" alt="image" src="https://github.com/user-attachments/assets/0e663370-6b94-4d89-8cdd-83c9361b1c19">
+</p>
+
 The folowing components are part of this example:
 * Lightning Web Component: `filePrimer`
 * Lightning Web Component: `recordFilePrimer`
@@ -36,6 +46,12 @@ The folowing components are part of this example:
 In order to use the component create a Lightning Web Component `Global Action` which uses the `scheduleFilePrimer` LWC and add it to the `Mobile & Lightning Actions` section on the `Publisher Layout` which is assigned to the profile of the mobile user. This allows the user to prime files related to the Work Orders and Work Order Line Items which are part of their schedule for the given number of days.
 
 In order to allow the user to prime files related to a record, use the `recordFilePrimer` LWC, create the object specific `Quick Action` and add it to the `Mobile & Lightning Actions` section on the `Page Layout` which is assigned to the profile of the mobile user. 
+
+## Important
+* This component has not been thoroughly tested - especially not on Android! - and it is recommended to test it using a variety of files, file sizes and connectivity scenarios
+* The maximum number of days to prime can be adjusted in the file `scheduleFilePrimer.js` and it is strongly recommended to keep this number as low as possible to match the business requirements
+* Once the user logs out, the local cache of the mobile app related to that user is removed, so the files are also no longer cached
+* In the LWC some files show a preview, which is a feature of the WebView in which the LWC runs. This is not a feature of LWC
 
 # Online Or Offline (isOnlineOrOffline)
 This component can detect if the LWC is online or offline. Today (Winter '25) there is no standard method in LWC to detect this. By using imperative Apex with a simple Apex method it can be derived if the LWC is online or offline. It is important to understand that the online and offline state is not detected automatically and it only works on demand.
