@@ -1,0 +1,68 @@
+<template>
+    <lightning-card variant="narrow">
+        <div slot="title">
+            <div lwc:ref="toggleDiv" onclick={toggleFiles}>
+                <lightning-icon 
+                    icon-name={fileDetailsIcon}
+                    alternative-text={fileDetailsText}
+                    size="x-small"
+                    title="x-small size">
+                </lightning-icon>           
+                <lightning-icon 
+                    class="slds-var-m-left_x-small"
+                    icon-name={objectIcon} 
+                    size="small">
+                </lightning-icon>
+                <span class="slds-var-m-left_x-small" style="font-weight: normal;">
+                    {parentRecordNumber}
+                </span>
+            </div>
+        </div>                
+        <div slot="actions">
+            <lightning-button-icon 
+                icon-name="utility:refresh" 
+                variant="bare" 
+                alternative-text="Refresh"
+                onclick={refreshFiles}>
+                <label>Refresh</label>
+            </lightning-button-icon>
+            <lightning-button-icon 
+                icon-name="utility:open" 
+                variant="bare" 
+                alternative-text="Related"
+                onclick={openRelated}>
+                <label>Related Files</label>
+            </lightning-button-icon>
+        </div>                    
+        <template lwc:if={showHeader}>
+            <div class="slds-var-m-around_medium">
+                This component primes files related to this record.
+            </div>
+        </template>
+        <div class="slds-var-m-left_large slds-var-m-right_large slds-var-p-left_large slds-var-p-right_large">
+            <div onclick={toggleFiles}>
+                <div>
+                    <lightning-progress-bar
+                        value={primeProgress}
+                        variant="circular"
+                    ></lightning-progress-bar>
+                </div>                    
+                <div class="slds-text-body_small">Progress: {filesLoaded}/{numOfFiles} ({sizeLoadedKB}/{totalSizeKB}KB)</div>
+            </div>
+            <template lwc:if={renderFiles}>
+                <div lwc:ref="filesDiv" style="display:none;">
+                    <template for:each={filesDetails} for:item="file">
+                        <div key={file.contentVersionId}>
+                            <c-file-primer
+                                parent-record-id={recordId}
+                                content-document-id={file.contentDocumentId}
+                                content-version-id={file.contentVersionId}  
+                                onfileloaded={fileLoaded}
+                            ></c-file-primer>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
