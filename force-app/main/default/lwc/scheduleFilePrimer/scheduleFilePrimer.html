@@ -1,0 +1,94 @@
+<template>
+    <lightning-card title="Prime Files" icon-name="action:download" variant="narrow">
+        <div slot="actions">
+            <template lwc:if={primingStarted}>
+                <lightning-button-icon 
+                    icon-name="utility:refresh" 
+                    variant="bare" 
+                    alternative-text="Refresh"
+                    onclick={refreshSchedule}>
+                    <label>Refresh</label>
+                </lightning-button-icon>
+            </template>
+        </div>         
+        <div class="slds-var-m-around_medium">
+            <template lwc:if={primingStarted}>
+                <div class="slds-var-m-around_medium">
+                    Priming all files related to the {numOfParentRecords} work orders and work order line items that are part of your current schedule in the selected {horizon} day(s).
+                </div>
+                <div class="slds-var-m-around_medium">
+                    <div style="display:block;height:24px;width:100%;">
+                        <template lwc:if={primingInProgress}>
+                            <lightning-spinner 
+                                wc:ref="spinner" 
+                                alternative-text="Priming files..." 
+                                variant="brand" 
+                                size="small"
+                                style="display:block;position:relative;">
+                            </lightning-spinner>
+                        </template>
+                    </div>
+                    <div>
+                        <lightning-progress-bar
+                            value={primeProgress}
+                            variant="circular"
+                        ></lightning-progress-bar>
+                    </div>                    
+                    <div>Number of files: {totalFilesLoaded}/{totalFiles}</div>
+                    <div>Total size: {totalSizeLoadedInKB}/{totalSizeInKB}KB</div>
+                </div>
+            </template>
+            <template lwc:else>
+                <div class="slds-var-m-around_medium">
+                    This component will prime all files related to the work orders and work order line items that are part of your current schedule.
+                </div>
+                <div class="slds-align_absolute-center" style="width: 100%;">
+                    <lightning-slider 
+                        min="1"
+                        max={maxHorizon}
+                        value={horizon}
+                        size="medium"
+                        label="Prime files for how many days into the future, including today?"
+                        onchange={updateHorizon}>
+                    </lightning-slider>
+                </div>                
+                <div class="slds-align_absolute-center" style="width: 100%;">
+                    <lightning-button
+                        label="Start Priming Files"
+                        variant="brand"
+                        onclick={startPriming}>
+                    </lightning-button>
+                </div>
+                <template lwc:if={filesPrimedLastDateTime}>
+                    <div class="slds-var-m-top_medium slds-text-body_small slds-align_absolute-center" style="width: 100%;">
+                        Last prime date: {filesPrimedLastDateTimeString}
+                    </div>
+                </template>
+            </template>
+            <div class="slds-var-m-around_medium slds-text-body_small">Dependent on the number of files, the file size and the connectivity of your device, this may take a while. It is strongly recommended to prime the files when your device has a stable internet connection.</div>
+            <div class="slds-var-m-around_medium slds-text-body_small">Once the files are primed you can view the files - even when you're device is offline - by navigating to the Files related list of the Work Orders</div>            
+        </div>
+        <template lwc:if={primingStarted}>
+            <div class="slds-var-m-left_medium slds-var-m-right_medium" onclick={toggleFiles}>
+                <lightning-icon 
+                    icon-name={detailsIcon}
+                    alternative-text={detailsText}
+                    size="x-small"
+                    title="x-small size">
+                </lightning-icon>
+                <span class="slds-var-m-left_x-small">{detailsText}</span>
+            </div>
+            <div lwc:ref="filesDiv" style="display:none;">
+                <template for:each={parentRecords} for:item="record">
+                    <c-record-file-primer
+                        key={record.id}
+                        record-id={record.id}
+                        record-type={record.type}
+                        hide-header="true"
+                        onfiledetails={fileDetails}
+                    ></c-record-file-primer>
+                </template>
+            </div>
+        </template>
+    </lightning-card>
+</template>
