@@ -14,7 +14,7 @@
         <div class="slds-var-m-around_medium">
             <template lwc:if={primingStarted}>
                 <div class="slds-var-m-around_medium">
-                    Priming all files related to the {numOfParentRecords} work orders and work order line items that are part of your current schedule in the selected {horizon} day(s).
+                    Priming all files<sup>(*)</sup> related to the {numOfParentRecords} work orders and work order line items that are part of your current schedule in the selected {horizon} day(s).
                 </div>
                 <div class="slds-var-m-around_medium">
                     <div style="display:block;height:24px;width:100%;">
@@ -40,7 +40,7 @@
             </template>
             <template lwc:else>
                 <div class="slds-var-m-around_medium">
-                    This component will prime all files related to the work orders and work order line items that are part of your current schedule.
+                    This component will prime all files<sup>(*)</sup> related to the work orders and work order line items that are part of your current schedule.
                 </div>
                 <div class="slds-align_absolute-center" style="width: 100%;">
                     <lightning-slider 
@@ -65,8 +65,15 @@
                     </div>
                 </template>
             </template>
-            <div class="slds-var-m-around_medium slds-text-body_small">Dependent on the number of files, the file size and the connectivity of your device, this may take a while. It is strongly recommended to prime the files when your device has a stable internet connection.</div>
-            <div class="slds-var-m-around_medium slds-text-body_small">Once the files are primed you can view the files - even when you're device is offline - by navigating to the Files related list of the Work Orders</div>            
+            <div class="slds-var-m-around_medium slds-text-body_small">
+                <sup>(*)</sup> File extensions that will be primed: {allowedFileExts}. Maximum file size: {maxFileSize}
+            </div>
+            <div class="slds-var-m-around_medium slds-text-body_small">
+                Dependent on the number of files, the file size and the connectivity of your device, this may take a while. It is strongly recommended to prime the files when your device has a stable internet connection.
+            </div>
+            <div class="slds-var-m-around_medium slds-text-body_small">
+                Once the files are primed you can view the files - even when you're device is offline - by navigating to the Files related list of the Work Orders
+            </div>
         </div>
         <template lwc:if={primingStarted}>
             <div class="slds-var-m-left_medium slds-var-m-right_medium" onclick={toggleFiles}>

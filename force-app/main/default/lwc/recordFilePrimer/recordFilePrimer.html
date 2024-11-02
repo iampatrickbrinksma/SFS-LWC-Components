@@ -36,33 +36,43 @@
         </div>                    
         <template lwc:if={showHeader}>
             <div class="slds-var-m-around_medium">
-                This component primes files related to this record.
+                This component primes files<sup>(*)</sup> related to this record.
             </div>
         </template>
         <div class="slds-var-m-left_large slds-var-m-right_large slds-var-p-left_large slds-var-p-right_large">
-            <div onclick={toggleFiles}>
-                <div>
-                    <lightning-progress-bar
-                        value={primeProgress}
-                        variant="circular"
-                    ></lightning-progress-bar>
-                </div>                    
-                <div class="slds-text-body_small">Progress: {filesLoaded}/{numOfFiles} ({sizeLoadedKB}/{totalSizeKB}KB)</div>
-            </div>
-            <template lwc:if={renderFiles}>
-                <div lwc:ref="filesDiv" class={fileListClass}>
-                    <template for:each={filesDetails} for:item="file">
-                        <div key={file.contentVersionId}>
-                            <c-file-primer
-                                parent-record-id={recordId}
-                                content-document-id={file.contentDocumentId}
-                                content-version-id={file.contentVersionId}  
-                                onfileloaded={fileLoaded}
-                            ></c-file-primer>
-                        </div>
-                    </template>
+            <template lwc:if={hasFiles}>
+                <div onclick={toggleFiles}>
+                    <div>
+                        <lightning-progress-bar
+                            value={primeProgress}
+                            variant="circular"
+                        ></lightning-progress-bar>
+                    </div>                    
+                    <div class="slds-text-body_small">Progress: {filesLoaded}/{numOfFiles} ({sizeLoadedKB}/{totalSizeKB}KB)</div>
                 </div>
+                <template lwc:if={renderFiles}>
+                    <div lwc:ref="filesDiv" class={fileListClass}>
+                        <template for:each={filesDetails} for:item="file">
+                            <div key={file.contentVersionId}>
+                                <c-file-primer
+                                    parent-record-id={recordId}
+                                    content-document-id={file.contentDocumentId}
+                                    content-version-id={file.contentVersionId}  
+                                    onfileloaded={fileLoaded}
+                                ></c-file-primer>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </template>
+            <template lwc:else>
+                <div class="slds-text-body_small">No files.</div>
             </template>
         </div>
+        <template lwc:if={showHeader}>
+            <div class="slds-var-m-around_medium slds-text-body_small">
+                <sup>(*)</sup> File extensions that will be primed: {allowedFileExts}. Maximum file size: {maxFileSize}
+            </div>
+        </template>
     </lightning-card>
 </template>

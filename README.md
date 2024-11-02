@@ -40,12 +40,15 @@ Some screenshots:
 
 The folowing components are part of this example:
 * Lightning Web Component: `filePrimer`
+* Lightning Web Component: `filePrimerConfig`
 * Lightning Web Component: `recordFilePrimer`
 * Lightning Web Component: `scheduleFilePrimer`
 
 In order to use the component create a Lightning Web Component `Global Action` which uses the `scheduleFilePrimer` LWC and add it to the `Mobile & Lightning Actions` section on the `Publisher Layout` which is assigned to the profile of the mobile user. This allows the user to prime files related to the Work Orders and Work Order Line Items which are part of their schedule for the given number of days.
 
 In order to allow the user to prime files related to a record, use the `recordFilePrimer` LWC, create the object specific `Quick Action` and add it to the `Mobile & Lightning Actions` section on the `Page Layout` which is assigned to the profile of the mobile user. 
+
+To filter out files based on the file extension and/or file size, update the `filePrimerConfig.js` to reflect the appropriate filter.
 
 ## Important
 * This component has not been thoroughly tested - especially not on Android! - and it is recommended to test it using a variety of files, file sizes and connectivity scenarios

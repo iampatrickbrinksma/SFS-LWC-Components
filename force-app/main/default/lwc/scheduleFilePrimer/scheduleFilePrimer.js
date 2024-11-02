@@ -5,6 +5,9 @@ import { gql, graphql, refreshGraphQL } from 'lightning/uiGraphQLApi';
 import WebStorage from 'c/webStorage';
 let ws;
 
+// Filters to filter out files
+import FILEPRIMER_CONFIG from 'c/filePrimerConfig';
+
 // For storing the timestamp of the latest
 // file priming in WebStorage
 const STORAGE_ID = 'scheduleFilePrimer';
@@ -41,6 +44,9 @@ export default class ScheduleFilePrimer extends LightningElement {
     // Keeping track of total number of files
     // and the total file size and progress
     @track scheduleFiles = [];
+
+    // File primer config 
+    _filePrimerConfig = FILEPRIMER_CONFIG;
 
     // GraphQL query result to 
     // support refreshGraphQL
@@ -278,6 +284,21 @@ export default class ScheduleFilePrimer extends LightningElement {
     // Indicate priming is in progress
     get primingInProgress() {
         return this.totalFiles > 0 && this.totalFilesLoaded < this.totalFiles ? true : false;
+    }
+
+    // Which file extensions are primed?
+    get allowedFileExts() {
+        return this._filePrimerConfig.filterFiles && Array.isArray( this._filePrimerConfig.fileExtensions ) 
+            && this._filePrimerConfig.fileExtensions.length > 0 
+                ? this._filePrimerConfig.fileExtensions.join( ", ") 
+                : "all file extensions";
+    }
+
+    // What is the maximum file size primed?
+    get maxFileSize() {
+        return this._filePrimerConfig.filterFiles && this._filePrimerConfig.maxFileSize !== undefined 
+            ? `${ ( this._filePrimerConfig.maxFileSize / 1000 ).toFixed(0) }KB` 
+            : "all file sizes";
     }
 
 
