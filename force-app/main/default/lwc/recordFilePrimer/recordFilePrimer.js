@@ -3,6 +3,9 @@ import { gql, graphql, refreshGraphQL } from 'lightning/uiGraphQLApi';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { NavigationMixin } from 'lightning/navigation';
 
+// Filters to filter out files
+import FILEPRIMER_CONFIG from 'c/filePrimerConfig';
+
 // Fields for parent record details
 import WO_WONUMBER_FIELD from "@salesforce/schema/WorkOrder.WorkOrderNumber";
 import WOLI_LINENUMBER_FIELD from "@salesforce/schema/WorkOrderLineItem.LineItemNumber";
@@ -27,6 +30,8 @@ export default class RecordFilePrimer extends NavigationMixin( LightningElement 
     // File details
     // including tracking progress
     @track filesDetails = [];
+
+    _filePrimerConfig = FILEPRIMER_CONFIG;
 
     // Indicator if user
     // use refresh button 
@@ -101,12 +106,12 @@ export default class RecordFilePrimer extends NavigationMixin( LightningElement 
                     title: edge.node.ContentDocument.LatestPublishedVersion.Title.value,
                     type: edge.node.ContentDocument.LatestPublishedVersion.FileType.value,
                     size: edge.node.ContentDocument.LatestPublishedVersion.ContentSize.value,
-                    fileExtension: edge.node.ContentDocument.LatestPublishedVersion.FileExtension.value,
+                    ext: edge.node.ContentDocument.LatestPublishedVersion.FileExtension.value,
                     lastModDate: edge.node.ContentDocument.LatestPublishedVersion.LastModifiedDate.displayValue,
                 };
             }); 
             if ( records.length > 0 ) {
-                this.filesDetails = records;
+                this.filesDetails = this.filterFiles( records );
                 this.dispatchFileDetails();
                 this.renderFiles = true;
             }
@@ -155,6 +160,22 @@ export default class RecordFilePrimer extends NavigationMixin( LightningElement 
         }
     }    
 
+    // Filter files based on paramters set
+    // in the File Primer Config
+    filterFiles( files ) {
+        return !this._filePrimerConfig.filterFiles ? files : 
+            files.filter( 
+                ( file ) => {
+                    return ( this._filePrimerConfig.fileExtensions.length === 0 || 
+                        ( 
+                            this._filePrimerConfig.fileExtensions.length > 0 && 
+                            this._filePrimerConfig.fileExtensions.includes( ( file.ext ).toLowerCase() ) 
+                        ) ) && 
+                        ( this._filePrimerConfig.maxFileSize !== undefined && file.size <= this._filePrimerConfig.maxFileSize );
+                }
+        );
+    }
+
     // Navigate to related lists of parent record
     // so user can navigate to Files related list
     openRelated() {
@@ -193,12 +214,12 @@ export default class RecordFilePrimer extends NavigationMixin( LightningElement 
 
     // Indicate if parent record has related files
     get hasFiles() {
-        return this.filesDetails?.length > 0;
+        return this.numOfFiles > 0;
     }
 
     // Total number of related files
     get numOfFiles() {
-        return this.filesDetails.length;
+        return this.filesDetails?.length;
     }
 
     // Total number of files that have been primed
@@ -274,6 +295,21 @@ export default class RecordFilePrimer extends NavigationMixin( LightningElement 
     get fileListClass() {
         return this.showFileList ? "showFilesList" : "hideFilesList";
     }
+
+    // Which file extensions are primed?
+    get allowedFileExts() {
+        return this._filePrimerConfig.filterFiles && Array.isArray( this._filePrimerConfig.fileExtensions ) 
+            && this._filePrimerConfig.fileExtensions.length > 0 
+                ? this._filePrimerConfig.fileExtensions.join( ", ") 
+                : "all file extensions";
+    }
+
+    // What is the maximum file size primed?
+    get maxFileSize() {
+        return this._filePrimerConfig.filterFiles && this._filePrimerConfig.maxFileSize !== undefined 
+            ? `${ ( this._filePrimerConfig.maxFileSize / 1000 ).toFixed(0) }KB` 
+            : "all file sizes";
+    }    
 
     // Dispatch event which includes inforamtion
     // about total nr of files, size and progress
