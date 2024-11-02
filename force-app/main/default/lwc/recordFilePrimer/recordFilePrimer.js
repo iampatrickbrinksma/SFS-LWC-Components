@@ -4,7 +4,7 @@ import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { NavigationMixin } from 'lightning/navigation';
 
 // Filters to filter out files
-import FILEPRIMER_CONFIG from 'c/filePrimerConfig';
+import { FILEPRIMER_CONFIG } from 'c/filePrimerConfig';
 
 // Fields for parent record details
 import WO_WONUMBER_FIELD from "@salesforce/schema/WorkOrder.WorkOrderNumber";
@@ -295,21 +295,6 @@ export default class RecordFilePrimer extends NavigationMixin( LightningElement 
     get fileListClass() {
         return this.showFileList ? "showFilesList" : "hideFilesList";
     }
-
-    // Which file extensions are primed?
-    get allowedFileExts() {
-        return this._filePrimerConfig.filterFiles && Array.isArray( this._filePrimerConfig.fileExtensions ) 
-            && this._filePrimerConfig.fileExtensions.length > 0 
-                ? this._filePrimerConfig.fileExtensions.join( ", ") 
-                : "all file extensions";
-    }
-
-    // What is the maximum file size primed?
-    get maxFileSize() {
-        return this._filePrimerConfig.filterFiles && this._filePrimerConfig.maxFileSize !== undefined 
-            ? `${ ( this._filePrimerConfig.maxFileSize / 1000 ).toFixed(0) }KB` 
-            : "all file sizes";
-    }    
 
     // Dispatch event which includes inforamtion
     // about total nr of files, size and progress

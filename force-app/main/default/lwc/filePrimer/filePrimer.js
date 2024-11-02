@@ -3,7 +3,7 @@ import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { getRecord } from 'lightning/uiRecordApi';
 
 // Mapping of file types to icons and a default icon
-import { FILE_TYPES } from './fileTypes';
+import { FILE_TYPE_ICONS } from 'c/filePrimerConfig';
 
 // eslint-disable-next-line @salesforce/lwc-graph-analyzer/no-unresolved-parent-class-reference
 export default class FilePrimer extends LightningElement {
@@ -26,7 +26,7 @@ export default class FilePrimer extends LightningElement {
     contentVersionObjInfo
     contentVersionFields;
 
-    fileTypes = FILE_TYPES;
+    fileTypeIcons = FILE_TYPE_ICONS;
 
     // Prime Object Info (metadata) for
     // the objects related to Files in Salesforce:
@@ -163,7 +163,7 @@ export default class FilePrimer extends LightningElement {
 
     // File type
     get typeOfFile() {
-        return this.file?.type ? this.fileTypes[ this.file.type ] ? this.fileTypes[ this.file.type ] : this.fileTypes[ 'UNKNOWN' ] : undefined;
+        return this.file?.type ? this.fileTypeIcons[ this.file.type ] ? this.fileTypeIcons[ this.file.type ] : this.fileTypeIcons[ 'UNKNOWN' ] : undefined;
     }
 
     // File size in KiloBytes
