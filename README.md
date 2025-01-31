@@ -87,6 +87,8 @@ In order for the user to be able to have the right permissions, make sure to do 
   - Last Known Location
   - Last Known Location Date
 
+**IMPORTANT:** In the Spring '25 release it's possible to provide read/edit permission for the ```Last Known Location``` field, but no edit permission for the ```Last Known Location Date``` field. Also not via the workaround described below. Therefor the component does NOT update the ```Last Known Location``` field anymore...
+
 Note: This is NOT possible via the Profile or Permission Set in the Setup UI. However, you can grant Edit permission as following:
 1. Navigate to Setup -> Object Manager -> Service Resource -> Fields & Relationships -> Last Known Location -> Set Field-Level Security and make sure the Visible option is checked for the Profile of the mobile user.
 2. For the Last Known Location Date, update the URL of step 1 from `.../lightning/setup/ObjectManager/ServiceResource/FieldsAndRelationships/LastKnownLocation/edit...` to `.../lightning/setup/ObjectManager/ServiceResource/FieldsAndRelationships/LastKnownLocationDate/edit...`, so changing `LastKnownLocation` to `LastKnownLocationDate`
