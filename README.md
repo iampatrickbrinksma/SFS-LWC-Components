@@ -137,13 +137,15 @@ When using Deep Linking to navigate from an external app, or from within the app
 This example shows how to generate the signature in Apex for links that are "static" in nature, meaning they just rely on the Salesforce record Id and not dynamic parameters. The example includes an Apex class with a method to generate the deep link urls for a record and store them in a custom field, and a Lightning Web Component to use it in the mobile app. 
 
 The folowing components are part of this example:
-* Apex Class: `DeepLinkUrl`
+* Apex Class: `DeepLinkUtil`
 * Lightning Web Component: `recordDeepLinks`
 * Custom Field: `ServiceAppointment.Deeplink_Url__c`
 * Quick Action: `ServiceAppointment.Deep_Link_Urls`
+* Quick Action: `WorkOrder.Deep_Link_Urls` (this one makes more sense due to more deep link options)
 * Permission Set: `Field_Service_Deep_Linking_Permissions`
 
-Deploy these components, add the Quick Action to the assigned Page Layout for Service Appointment and assign the Permission Set to your user and the user of the mobile app. Then update the custom field on a Service Appointment record like:
+First step is to copy the public key from the `DeepLinkUtil` Apex Class (see the comments section in the class) - or generate a new public and private key following the instructions in the comments - to the Setup -> Field Service Settings -> Public Security Key field and save the changes.
+Then deploy these components, add the Quick Action to the assigned Page Layout for Service Appointment and the one for Work Order and assign the Permission Set to your user and the user of the mobile app. Then update the custom field on a Service Appointment record like:
 ```
 // List of Quick Actions for which you want to generate a deep link url with signature
 List<DeepLinkUtil.deepLinkAction> quickActions = new List<DeepLinkUtil.deepLinkAction>{
