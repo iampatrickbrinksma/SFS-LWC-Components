@@ -4,6 +4,7 @@
     <isExposed>true</isExposed>
     <targets>
         <target>lightning__RecordAction</target>
+        <target>lightning__GlobalAction</target>
     </targets>
      <targetConfigs>
     <targetConfig targets="lightning__RecordAction">
