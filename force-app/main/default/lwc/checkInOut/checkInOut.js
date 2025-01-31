@@ -16,7 +16,7 @@ import FLD_CHECKEDINOUT from "@salesforce/schema/ServiceResource.Checked_In_Out_
 import FLD_CHECKEDDATE from "@salesforce/schema/ServiceResource.Checked_In_Out_Date__c";
 import FLD_LASTKNOWNLAT from "@salesforce/schema/ServiceResource.LastKnownLatitude";
 import FLD_LASTKNOWNLNG from "@salesforce/schema/ServiceResource.LastKnownLongitude";
-import FLD_LASTKNOWNDT from "@salesforce/schema/ServiceResource.LastKnownLocationDate";
+//import FLD_LASTKNOWNDT from "@salesforce/schema/ServiceResource.LastKnownLocationDate";
 import FLD_INJEOPARDY from "@salesforce/schema/ServiceAppointment.FSL__InJeopardy__c";
 import FLD_INJEOPARDYREASON from "@salesforce/schema/ServiceAppointment.FSL__InJeopardyReason__c";
 // Helpers
@@ -383,7 +383,7 @@ export default class CheckInOut extends LightningElement {
         fields[FLD_CHECKEDINOUT.fieldApiName] = this.checkedInOutValue === this.CONSTANTS.CHECKEDIN ? this.CONSTANTS.CHECKEDOUT : this.CONSTANTS.CHECKEDIN;
         fields[FLD_CHECKEDDATE.fieldApiName] = new Date().toISOString();
         if (lat !== null){
-            fields[FLD_LASTKNOWNDT.fieldApiName] = new Date(timestamp).toISOString();
+            //fields[FLD_LASTKNOWNDT.fieldApiName] = new Date(timestamp).toISOString();
             fields[FLD_LASTKNOWNLAT.fieldApiName] = lat;
             fields[FLD_LASTKNOWNLNG.fieldApiName] = lng;
         }
