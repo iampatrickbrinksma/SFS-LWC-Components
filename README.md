@@ -141,7 +141,6 @@ The folowing components are part of this example:
 * Lightning Web Component: `recordDeepLinks`
 * Custom Field: `ServiceAppointment.Deeplink_Url__c`
 * Quick Action: `ServiceAppointment.Deep_Link_Urls`
-* Quick Action: `WorkOrder.Deep_Link_Urls` (this one makes more sense due to more deep link options)
 * Permission Set: `Field_Service_Deep_Linking_Permissions`
 
 First step is to copy the public key from the `DeepLinkUtil` Apex Class (see the comments section in the class) - or generate a new public and private key following the instructions in the comments - to the Setup -> Field Service Settings -> Public Security Key field and save the changes.
